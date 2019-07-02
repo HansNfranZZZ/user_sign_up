@@ -24,31 +24,28 @@ def sign_up():
     retype_error = ""
     
     if password != verify:
-        retype_error = "The passwords do not match"
-    else: retype_error = ""
+        retype_error = "The passwords do not match."
+    else: 
+        retype_error = ""
 
-    if " " in username or len(username) <= 3 or len(username) >=20:
-        username_error = "The username is not valid"
+    if " " in username or len(username) < 3 or len(username) >20:
+        username_error = "The username is not valid."
     else: username_error = ""
     
-    if " " in password or len(password) <= 3 or len(password) >=20:
-        password_error = "The password is not valid"
+    if " " in password or len(password) < 3 or len(password) >20:
+        password_error = "The password is not valid."
     else: username_error = ""
   
-    if " " in email or len(email) <= 3  or len(email) >=20 or "." not in email or "@" not in email:
+    if " " in email or len(email) < 3  or len(email) >20 or "." not in email or "@" not in email:
         email_error = "The email is not valid."
     else: 
         email_error = ""
         
-    return render_template("front_page.html",username_error=username_error,password_error=password_error, email_error=email_error,retype_error=retype_error)
-    
-    
-
-    
-@app.route("/welcome", methods=["GET"])
-def logged_in():
-    username = request.args.get("username")
-    return render_template("welcome.html",username=username) 
-             
+    if username_error == password_error == email_error == retype_error:
+        
+        return render_template("welcome.html",username=username)
+    else: 
+        return render_template("front_page.html",username_error=username_error,password_error=password_error, email_error=email_error,retype_error=retype_error)
+               
      
 app.run()
