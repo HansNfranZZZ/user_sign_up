@@ -45,7 +45,7 @@ def sign_up():
         
         return render_template("welcome.html",username=username)
     else: 
-        return render_template("front_page.html",username_error=username_error,password_error=password_error, email_error=email_error,retype_error=retype_error)
+        return render_template("front_page.html",username = username, email = email, username_error=username_error,password_error=password_error, email_error=email_error,retype_error=retype_error)
                
      
 app.run()
