@@ -11,6 +11,8 @@ def homepage():
 
 @app.route("/", methods=['POST'])
 def sign_up():
+    
+
     username = request.form["username"]
     email = request.form["email"]
     password = request.form["password"]
@@ -35,14 +37,15 @@ def sign_up():
   
     if " " in email or len(email) <= 3  or len(email) >=20 or "." not in email or "@" not in email:
         email_error = "The email is not valid."
-    else: email_error = ""
+    else: 
+        email_error = ""
+        
+    return render_template("front_page.html",username_error=username_error,password_error=password_error, email_error=email_error,retype_error=retype_error)
+    
     
 
-    if username_error == password_error == email_error == retype_error:
-        return str("<h1> Welcome, ") + username + str("!</h1>"
-
     
-@app.route("/welcome")
+@app.route("/welcome", methods=["GET"])
 def logged_in():
     username = request.args.get("username")
     return render_template("welcome.html",username=username) 
