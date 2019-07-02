@@ -16,7 +16,7 @@ def sign_up():
     password = request.form["password"]
     verify = request.form["verify"]
 
-    username_error = "Username is not valid"
+    username_error = ""
     password_error = ""
     email_error = ""
     retype_error = ""
@@ -24,18 +24,19 @@ def sign_up():
     while True: 
         valid = False 
         if password != verify:
-            return str("<span> passwords do not match </span>")
+            retype_error = "The passwords do not match"
             continue
         elif " " in username or len(username) <= 3 or len(username) >=20:
-                    return render_template("front_page.html", username_error = username_error)
+                    username_error = "The username is not valid"
                     continue
         elif " " in password or len(password) <= 3 or len(password) >=20:
-                    return str("<span> password is not valid </span>")
+                    password_error = "The password is not valid"
                     continue
         elif " " in email or len(email) <= 3  or len(email) >=20 or "." not in email or "@" not in email:
-                            return str("<span> email is not valid </span>")
+                            email_error = "The email is not valid."
                             continue
         else:
+            return render_template(front_page.html, retype_error=retype_error,password_error=password_error,email_error=email_error,username_error=username_error)
             valid = True
             break
     if valid:
