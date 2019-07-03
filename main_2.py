@@ -36,9 +36,13 @@ def sign_up():
         password_error = "The password is not valid."
     else: username_error = ""
   
-    if " " in email or len(email) < 3  or len(email) >20 or "." not in email or "@" not in email:
-        email_error = "The email is not valid."
-    else: 
+    if email != "":
+        if " " in email or len(email) < 3  or len(email) >20 or "." not in email or "@" not in email:
+            email_error = "The email is not valid."
+        else: 
+            email_error = ""
+
+    else:
         email_error = ""
         
     if username_error == password_error == email_error == retype_error:
